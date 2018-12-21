@@ -20,16 +20,17 @@
 $user = 'dleach';
 $pass = 'newpass';
 
-// connect to the database
 
 
 
-// select a database:
+
+
 
 try{
-
+//connecting to the database
 $conn = new PDO('mysql:host=localhost;dbname=prices', $user, $pass);
 
+//printing as a test, output notworking from loop
 echo "hello";
  foreach($conn->query('SELECT * from prices') as $row) {
         print "<p>" . $row . "</p>";
@@ -38,6 +39,7 @@ echo "hello";
 }
 
 catch (PDOException $e) {
+	//display an error message if connection fails
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
 }
