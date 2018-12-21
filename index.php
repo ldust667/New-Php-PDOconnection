@@ -41,10 +41,24 @@ $conn = new PDO('mysql:host=localhost;dbname=prices', $user, $pass);
 $sqlst = $conn->prepare("select name from metals");
 $sqlst->execute();
 
-$result = $sqlst->fetchAll();
+//$result = $sqlst->fetchAll();
+//print($result[0][0]);
+
+$data = $sqlst->fetchall();
+
+//iterate 
+
+?>
+<ul>
+<?php foreach($data as $row):
+     print "<li>" . $row['name'] . "</li>";
+ endforeach ?>
+</ul>
 
 
-print($result[0][0]); 
+<?php
+
+
 
 
 
