@@ -32,7 +32,7 @@ $conn = new PDO('mysql:host=localhost;dbname=prices', $user, $pass);
 
 //printing as a test, output notworking from loop
 echo "hello";
- foreach($conn->query('SELECT * from prices') as $row) {
+ foreach($conn->query('SELECT * from metals') as $row) {
         print "<p>" . $row . "</p>";
     }
 
