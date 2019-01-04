@@ -41,7 +41,7 @@ $conn = new PDO('mysql:host=localhost;dbname=prices', $user, $pass);
 
 
 //select query for output
-$sqlst = $conn->prepare("select name from metals");
+$sqlst = $conn->prepare("select * from metals");
 $sqlst->execute();
 
 //$result = $sqlst->fetchAll();
@@ -61,6 +61,11 @@ $data = $sqlst->fetchall();
  endforeach ?>
 </thead>
 <tbody>
+<tr>
+<?php foreach($data as $row):
+     print "<th>" . $row['price_usd_lb'] . "</th>";
+ endforeach ?>
+</tr>
 </tbody>
 </table>
 
