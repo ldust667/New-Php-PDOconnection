@@ -23,7 +23,13 @@
 $user = 'dleach';
 $pass = 'newpass';
 
-
+//function to test input
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 
 
 
@@ -69,20 +75,32 @@ $data = $sqlst->fetchall();
 </tbody>
 </table>
 
+//change to block
+<div id="removeSearch" style="display:none">
+<input type="text" id="myInput" onkeyup="myEnterFunct()" placeholder="Search for records.." title="Type in a record">
+
+<ul id="listRemove">
+<?php foreach($data as $row):
+     print "<li><a href='#'>" . $row['name'] . "</a></li>";
+ endforeach ?>
+</ul>
+</div>
+
 </div>
 
 <div class="container form-group">
-  <form>
+  <form action="" onsubmit="mySubmit()">
+ <div id="addSearch">
   <label for="name">Name of metal:</label>
   <input type="text" name="name"><br>
   <label for="pricelb">Price of metal per pound:</label>
   <input type="text" name="pricelb">
-
+ </div>
 <div class="radio">
-  <label><input type="radio" name="optradio" checked>Add a record</label>
+  <label><input type="radio" name="optradio" value="1" onclick="addSelected();" checked>Add a record</label>
 </div>
 <div class="radio">
-  <label><input type="radio" name="optradio">Remove a record</label>
+  <label><input type="radio" name="optradio" value="2" onclick="removeSelected();">Remove a record</label>
 </div>
 
 <input type="submit" value="Submit">
@@ -106,6 +124,71 @@ catch (PDOException $e) {
 
 
 ?>
+
+
+
+<script>
+
+function mySubmit() {
+
+alert("Form submitted");
+//name, pricelb,add,remove
+//if(document.getElementById("add").checked){
+
+//alert("You have selected to add a record");
+
+//}
+
+
+}
+
+
+function addSelected(){
+
+alert("Your add button has been selected");
+
+}
+
+function removeSelected(){
+
+alert("Your remove button has been selected");
+
+}
+
+
+function myEnterFunct() {
+	//init variables
+    var input, filter, ul, li, a, i, txtValue;
+	//set variable for input searched in bar
+    input = document.getElementById("myInput");
+	//changes input to uppercase
+    filter = input.value.toUpperCase();
+	//set variable for list
+    ul = document.getElementById("listRemove");
+
+    li = ul.getElementsByTagName("li");
+
+    for (i = 0; i < li.length; i++) {
+
+        a = li[i].getElementsByTagName("a")[0];
+
+        txtValue = a.textContent || a.innerText;
+
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+
+            li[i].style.display = "";
+
+        } else {
+
+            li[i].style.display = "none";
+        }
+    }
+}
+
+
+
+</script>
+
 
 </body>
 
