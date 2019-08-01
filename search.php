@@ -19,6 +19,8 @@
 
 
 <?php
+	//this application pulls values from a database with php
+	//then uses a search with javascript to display records that match the search typed in 
 
 $user = 'dleach';
 $pass = 'newpass';
